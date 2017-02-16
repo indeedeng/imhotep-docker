@@ -1,0 +1,11 @@
+---
+#-   type: HDFS
+#    order: 2
+-   type: SQAR_AUTOMOUNTING
+    order: 4
+    mountpoint: /
+-   type: CACHED
+    order: 6
+    mountpoint: /
+    cache-dir: /var/data/file_cache
+    cacheSizeMB: 32000
