@@ -1,6 +1,7 @@
 ---
-#-   type: HDFS
-#    order: 2
+-   type: HDFS
+    order: 2
+    mountpoint: /
 -   type: SQAR_AUTOMOUNTING
     order: 4
     mountpoint: /
