@@ -1,8 +1,13 @@
 FROM library/centos:centos6
-RUN yum update -y
-RUN useradd shardbuilder
-RUN useradd tomcat7
-RUN yum install -y wget httpd cronie procmail
+
+# Install required packages
+RUN yum update -y && yum install -y \
+    vixie-cron \
+    httpd \
+    procmail \
+    wget \
+&& yum clean all
+
 RUN wget --no-cookies --no-check-certificate --header 'Cookie: oraclelicense=accept-securebackup-cookie' 'http://download.oracle.com/otn-pub/java/jdk/7u55-b13/jdk-7u55-linux-x64.rpm'
 RUN yum localinstall -y jdk-7u55-linux-x64.rpm
 RUN alternatives --install /usr/bin/java java /usr/java/jdk1.7.0_55/jre/bin/java 20000 \
@@ -14,6 +19,9 @@ RUN alternatives --install /usr/bin/java java /usr/java/jdk1.7.0_55/jre/bin/java
                  --slave /usr/bin/servertool servertool /usr/java/jdk1.7.0_55/jre/bin/servertool \
                  --slave /usr/bin/tnameserv tnameserv /usr/java/jdk1.7.0_55/jre/bin/tnameserv \
                  --slave /usr/bin/unpack2000 unpack2000 /usr/java/jdk1.7.0_55/jre/bin/unpack200
+
+RUN useradd shardbuilder
+RUN useradd tomcat7
 
 RUN echo "*/1  *  *  *  * shardbuilder /opt/imhotepTsvConverter/tsvConverter.sh" >> /etc/crontab
 
@@ -37,10 +45,10 @@ ADD iupload.properties /opt/tomcat7/conf/iupload.properties
 ADD zookeeper.ip /opt/tomcat7/conf/zookeeper.ip
 
 RUN mkdir -p /opt/imhotepTsvConverter
-RUN cd /opt/imhotepTsvConverter
 RUN wget -O /tmp/tsv-builder.tar.gz https://indeedeng-imhotep-build.s3.amazonaws.com/tsv-builder-1.0.0-complete.tar.gz
-RUN tar xzf /tmp/tsv-builder.tar.gz
-RUN ln -s /opt/imhotepTsvConverter/tsv-builder-* /opt/imhotepTsvConverter/shardBuilder
+RUN cd /opt/imhotepTsvConverter && \
+    tar xzf /tmp/tsv-builder.tar.gz && \
+    ln -s /opt/imhotepTsvConverter/tsv-builder-* /opt/imhotepTsvConverter/shardBuilder
 RUN mkdir /opt/imhotepTsvConverter/conf
 RUN chown shardbuilder /opt/imhotepTsvConverter/conf
 ADD tsvConverter.sh /opt/imhotepTsvConverter/tsvConverter.sh
@@ -64,8 +72,6 @@ RUN chmod go+w /var/data/iql/local_cache
 RUN wget -O /tmp/iql.war https://indeedeng-imhotep-build.s3.amazonaws.com/iql-1.0.5-SNAPSHOT.war
 RUN cp /tmp/iql.war /opt/tomcat7/webapps/
 
-#RUN sed -i 's/^CATALINA_TMPDIR=.*/CATALINA_TMPDIR=\"\/var\/data\/tomcat7\/temp\"/' /opt/tomcat7/conf/tomcat7.conf
-
 RUN wget -O /tmp/iupload.war https://indeedeng-imhotep-build.s3.amazonaws.com/iupload-war-1.0.1-SNAPSHOT.war
 RUN cp /tmp/iupload.war /opt/tomcat7/webapps/
 
@@ -76,8 +82,11 @@ RUN mkdir /var/data/apache
 RUN chmod go+rw /var/data/apache
 RUN cd /var/data/apache
 
+ADD startup.sh /opt/imhotepTsvConverter/startup.sh
+RUN chmod 0755 /opt/imhotepTsvConverter/startup.sh
+
 WORKDIR /opt/imhotepTsvConverter
 
 EXPOSE 80
 
-CMD crond && crontab /etc/crontab && service httpd start && service tomcat start && bash
+CMD ./startup.sh
