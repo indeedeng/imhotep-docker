@@ -17,8 +17,8 @@ RUN alternatives --install /usr/bin/java java /usr/java/jdk1.7.0_55/jre/bin/java
                  --slave /usr/bin/tnameserv tnameserv /usr/java/jdk1.7.0_55/jre/bin/tnameserv \
                  --slave /usr/bin/unpack2000 unpack2000 /usr/java/jdk1.7.0_55/jre/bin/unpack200
 
-ADD http://archive.cloudera.com/cdh5/cdh/5/zookeeper-3.4.5-cdh5.4.7.tar.gz /tmp/zookeeper.tar.gz
-RUN tar -xz -C /opt/ -f /tmp/zookeeper.tar.gz && ln -s /opt/zookeeper-3.4.5-cdh5.4.7 /opt/zookeeper
+ADD http://archive.cloudera.com/cdh5/cdh/5/zookeeper-3.4.5-cdh5.10.0.tar.gz /tmp/zookeeper.tar.gz
+RUN tar -xz -C /opt/ -f /tmp/zookeeper.tar.gz && ln -s /opt/zookeeper-3.4.5-cdh5.10.0 /opt/zookeeper
 
 RUN mkdir /var/zookeeper_snapshots
 
