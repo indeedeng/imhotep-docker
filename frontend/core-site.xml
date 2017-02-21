@@ -6,8 +6,12 @@
   <property>
     <!-- config valid for clientserver-->
     <name>fs.defaultFS</name>
-    <value>hdfs://localhost:9000/user/root/iupload</value>
+    <value>hdfs://hadoop:8020/imhotep/imhotep-build/iupload</value>
     <final>true</final>
+  </property>
+  <property>
+    <name>dfs.umaskmode</name>
+    <value>002</value>
   </property>
   <property>
     <!-- config valid for clientserver-->

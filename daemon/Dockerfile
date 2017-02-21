@@ -1,7 +1,11 @@
+# To build: docker build -t imhotep-daemon .
+# To run: docker run --hostname=hadoop -v /path/to/host-volume-directory:/var/lib/hadoop-hdfs -d imhotep-daemon
+
 FROM library/centos:centos6
 
 # Install required packages
 RUN yum update -y && yum install -y \
+    nc \
     python-setuptools \
     util-linux-ng \
     wget

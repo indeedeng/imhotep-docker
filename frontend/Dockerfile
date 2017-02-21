@@ -4,6 +4,7 @@ FROM library/centos:centos6
 RUN yum update -y && yum install -y \
     vixie-cron \
     httpd \
+    nc \
     procmail \
     wget \
 && yum clean all
