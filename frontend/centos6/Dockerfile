@@ -46,7 +46,7 @@ ADD iupload.properties /opt/tomcat7/conf/iupload.properties
 ADD zookeeper.ip /opt/tomcat7/conf/zookeeper.ip
 
 RUN mkdir -p /opt/imhotepTsvConverter
-RUN wget -O /tmp/tsv-builder.tar.gz https://indeedeng-imhotep-build.s3.amazonaws.com/tsv-builder-1.0.0-complete.tar.gz
+RUN wget -O /tmp/tsv-builder.tar.gz https://indeedeng-imhotep-build.s3.amazonaws.com/tsv-builder-1.0.1-SNAPSHOT-complete.tar.gz
 RUN cd /opt/imhotepTsvConverter && \
     tar xzf /tmp/tsv-builder.tar.gz && \
     ln -s /opt/imhotepTsvConverter/tsv-builder-* /opt/imhotepTsvConverter/shardBuilder
@@ -70,10 +70,10 @@ RUN chmod go+w /var/data/tomcat7/temp
 RUN chown -R tomcat7 /var/data/tomcat7
 RUN mkdir -p /var/data/iql/local_cache
 RUN chmod go+w /var/data/iql/local_cache
-RUN wget -O /tmp/iql.war https://indeedeng-imhotep-build.s3.amazonaws.com/iql-1.0.5-SNAPSHOT.war
+RUN wget -O /tmp/iql.war https://indeedeng-imhotep-build.s3.amazonaws.com/iql-1.0.6-SNAPSHOT.war
 RUN cp /tmp/iql.war /opt/tomcat7/webapps/
 
-RUN wget -O /tmp/iupload.war https://indeedeng-imhotep-build.s3.amazonaws.com/iupload-war-1.0.1-SNAPSHOT.war
+RUN wget -O /tmp/iupload.war https://indeedeng-imhotep-build.s3.amazonaws.com/iupload-war-1.0.2-SNAPSHOT.war
 RUN cp /tmp/iupload.war /opt/tomcat7/webapps/
 
 RUN mkdir -p /var/data/hdfs-tmp

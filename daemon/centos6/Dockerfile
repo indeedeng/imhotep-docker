@@ -51,7 +51,7 @@ ADD log4j.xml /opt/imhotep/log4j.xml
 ADD core-site.xml /opt/imhotep/core-site.xml
 
 RUN mkdir -p /var/data/imhotep/source/target
-ADD https://indeedeng-imhotep-build.s3.amazonaws.com/imhotep-server-1.0.10-SNAPSHOT-complete.tar.gz /var/data/imhotep/source/target/
+ADD https://indeedeng-imhotep-build.s3.amazonaws.com/imhotep-server-1.0.11-SNAPSHOT-complete.tar.gz /var/data/imhotep/source/target/
 RUN tar -xz -C /opt/imhotep/ -f /var/data/imhotep/source/target/imhotep-server-*.tar.gz
 RUN ln -s /opt/imhotep/imhotep-server-* /opt/imhotep/imhotep-server
 
