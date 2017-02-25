@@ -5,31 +5,20 @@ volumes:
 
 services:
     hadoop:
-        #build: hadoop
-        image: imhotep-cdh5-hdfs
+        image: local/imhotep-cdh5-hdfs:centos6
         volumes:
             - 'hdfs-data:/var/lib/hadoop-hdfs'
         expose:
             - "8020"
     zookeeper:
-        #build: zookeeper
-        image: imhotep-zookeeper
+        image: local/imhotep-zookeeper:centos6
         expose:
             - "2181"
-        #ports:
-        # - "2181:2181"
-        #network_mode: "host"
     daemon:
-        #build: daemon
-        image: imhotep-daemon
+        image: local/imhotep-daemon:centos6
         expose:
             - "12345"
-        #ports:
-        # - "12345:12345"
-        #network_mode: "host"
     frontend:
-        #build: frontend
-        image: imhotep-frontend
+        image: local/imhotep-frontend:centos6
         ports:
          - "${IQL_PORT}:80"
-        #network_mode: "host"
