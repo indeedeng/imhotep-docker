@@ -40,6 +40,7 @@ if [ "$?" != 0 ]; then
     su tomcat7 -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/imhotep-build/iupload/failed"
     su tomcat7 -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/imhotep-build/iupload/indexedtsv"
     su tomcat7 -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/imhotep-build/iupload/tsvtoindex"
+    su tomcat7 -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/iql/shortlinks"
     su shardbuilder -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/imhotep-data"
 fi
 
