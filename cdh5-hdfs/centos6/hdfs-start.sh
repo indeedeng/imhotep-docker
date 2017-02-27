@@ -37,6 +37,9 @@ if [ "$?" != 0 ]; then
     su hdfs -c "/usr/bin/hdfs dfs -chown hdfs:imhotep /imhotep"
     /usr/bin/hdfs dfsadmin -refreshUserToGroupsMappings
 
+    /usr/bin/hdfs dfs -chgrp imhotep /
+    /usr/bin/hdfs dfs -chmod g+w /
+
     su tomcat7 -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/imhotep-build/iupload/failed"
     su tomcat7 -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/imhotep-build/iupload/indexedtsv"
     su tomcat7 -c "/usr/bin/hdfs dfs -mkdir -p /imhotep/imhotep-build/iupload/tsvtoindex"
