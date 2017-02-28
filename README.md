@@ -74,7 +74,7 @@ unzip master.zip
 ```
 
 Before building the docker images, you may want to consider using the --squash option to
-save disk space. If your version of Docker has --squash support ([https://sreeninet.wordpress.com/2017/01/27/docker-1-13-experimental-features/]experimental in 1.13),
+save disk space. If your version of Docker has --squash support ([https://sreeninet.wordpress.com/2017/01/27/docker-1-13-experimental-features/](experimental in 1.13),
 you can set this environment variable to enable the option:
 ```
 export DOCKER_BUILD_OPTS=--squash
