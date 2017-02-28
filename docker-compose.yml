@@ -5,20 +5,20 @@ volumes:
 
 services:
     hadoop:
-        image: local/imhotep-cdh5-hdfs:centos6
+        image: indeedoss/imhotep-cdh5-hdfs:latest
         volumes:
             - 'hdfs-data:/var/lib/hadoop-hdfs'
         expose:
             - "8020"
     zookeeper:
-        image: local/imhotep-zookeeper:centos6
+        image: indeedoss/imhotep-zookeeper:latest
         expose:
             - "2181"
     daemon:
-        image: local/imhotep-daemon:centos6
+        image: indeedoss/imhotep-daemon:latest
         expose:
             - "12345"
     frontend:
-        image: local/imhotep-frontend:centos6
+        image: indeedoss/imhotep-frontend:latest
         ports:
          - "${IQL_PORT}:80"
