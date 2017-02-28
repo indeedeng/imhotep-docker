@@ -44,6 +44,20 @@ Follow the [Install Docker Compose](https://docs.docker.com/compose/install/) in
 
 ## Get the Imhotep Docker Images
 
+### Option 1: Pull Images from Docker Hub
+
+This option allows you to download pre-built images, which may save you some time building.
+
+Download the docker-compose.yml file into a new directory:
+```
+mkdir imhotep-docker
+cd imhotep-docker
+wget https://raw.githubusercontent.com/indeedeng/imhotep-docker/master/docker-compose.yml
+docker-compose pull
+```
+
+### Option 2: Build Images from Github
+
 Clone or download the [imhotep-docker](https://github.com/indeedeng/imhotep-docker) project.
 
 Option 1. Clone with SSH:
@@ -59,7 +73,6 @@ Option 3. Download and expand zip archive:
 wget https://github.com/indeedeng/imhotep-docker/archive/master.zip
 unzip master.zip
 ```
-## Build the Imhotep Docker Images
 
 Run the provided bash script to build and install the Imhotep docker images locally.
 ```
@@ -72,6 +85,8 @@ This script will run for a while, and when it is complete, you will have four im
 * local/imhotep-daemon:centos6
 * local/imhotep-cdh5-hdfs:centos6
 * local/imhotep-zookeeper:centos6
+
+Now change "indeedoss/" in the docker-compose.yml file to "local/".
 
 ## Run Docker Compose
 
