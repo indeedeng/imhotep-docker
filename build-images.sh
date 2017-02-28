@@ -37,3 +37,7 @@ done
 wait "${pids[@]}"
 
 docker images --filter "dangling=false" local/imhotep*
+
+echo
+echo "Changing indeedoss/ to local/ in docker-compose.yml"
+sed -i "s/indeedoss/local/" docker-compose.yml

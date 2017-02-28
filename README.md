@@ -5,7 +5,6 @@
 * [Install Docker](#install-docker)
 * [Install Docker Compose](#install-docker-compose)
 * [Get the Imhotep Docker Images](#get-the-imhotep-docker-images)
-* [Build the Imhotep Docker Images](#build-the-imhotep-docker-images)
 * [Run Docker Compose](#run-docker-compose)
 * [Use the Tools](#use-the-tools)
 * [Appendix A: Architecture](#appendix-a-architecture)
@@ -85,8 +84,6 @@ This script will run for a while, and when it is complete, you will have four im
 * local/imhotep-daemon:centos6
 * local/imhotep-cdh5-hdfs:centos6
 * local/imhotep-zookeeper:centos6
-
-Now change "indeedoss/" in the docker-compose.yml file to "local/".
 
 ## Run Docker Compose
 
