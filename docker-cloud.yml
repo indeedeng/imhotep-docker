@@ -1,0 +1,26 @@
+hadoop:
+    image: indeedoss/imhotep-cdh5-hdfs:latest
+    volumes:
+     - /var/lib/hadoop-hdfs
+    expose:
+     - "8020"
+    roles:
+     - global
+zookeeper:
+    image: indeedoss/imhotep-zookeeper:latest
+    expose:
+     - "2181"
+    roles:
+     - global
+daemon:
+    image: indeedoss/imhotep-daemon:latest
+    expose:
+     - "12345"
+    roles:
+     - global
+frontend:
+    image: indeedoss/imhotep-frontend:latest
+    ports:
+     - "80"
+    roles:
+     - global
