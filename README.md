@@ -120,6 +120,13 @@ hadoop_1     | /user/tomcat7
 ```
 These messages indicate HDFS is ready to be used by the Imhotep components.
 
+Due to a quirk of relative startup times, after first-time startup you'll need to restart the Tomcat in the frontend container in order for the short-link feature to work:
+```
+frontend_id=`docker ps | grep imhotep-frontend | cut -f1 -d\ `
+docker exec -i $frontend_id service tomcat stop
+docker exec -i $frontend_id service tomcat start
+```
+
 You should now be able to access the web tools for Imhotep:
 
 * IUpload: [http://localhost/iupload/](http://localhost/iupload/)
