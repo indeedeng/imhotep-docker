@@ -2,19 +2,45 @@ sudo: required
 
 services:
     - docker
-    
-before_install:
-    - cd $TRAVIS_BUILD_DIR/base-java7/centos6 && docker build -t indeedoss/imhotep-base-java7:centos6 && docker tag indeedoss/imhotep-base-java7:centos6 indeedoss/imhotep-base-java7:latest
-    - cd $TRAVIS_BUILD_DIR/zookeeper/centos6 && docker build -t indeedoss/imhotep-zookeeper:centos6 && docker tag indeedoss/imhotep-zookeeper:centos6 indeedoss/imhotep-zookeeper:latest
-    - cd $TRAVIS_BUILD_DIR/cdh5-hdfs/centos6 && docker build -t indeedoss/imhotep-cdh5-hdfs:centos6 && docker tag indeedoss/imhotep-cdh5-hdfs:centos6 indeedoss/imhotep-cdh5-hdfs:latest
-    - cd $TRAVIS_BUILD_DIR/daemon/centos6 && docker build -t indeedoss/imhotep-daemon:centos6 && docker tag indeedoss/imhotep-daemon:centos6 indeedoss/imhotep-daemon:latest
-    - cd $TRAVIS_BUILD_DIR/frontend/centos6 && docker build -t indeedoss/imhotep-frontend:centos6 && docker tag indeedoss/imhotep-frontend:centos6 indeedoss/imhotep-frontend:latest
+
+language: go
+
+env:
+    global:
+        - COMMIT=${TRAVIS_COMMIT::8}
 
 after_success:
-    - if [ "$TRAVIS_BRANCH" == "master" ]; then
-        docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-        docker push indeedoss/imhotep-zookeeper
-        docker push indeedoss/imhotep-cdh5-hdfs
-        docker push indeedoss/imhotep-daemon
-        docker push indeedoss/imhotep-frontend
-      fi
+    - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+    - export PFX=indeedoss/imhotep-
+    - export OS=centos6
+
+    - export IMG=base-java7
+    - cd $TRAVIS_BUILD_DIR/$IMG/$OS && docker build -t $PFX$IMG:$COMMIT .
+    - docker tag $PFX$IMG $PFX$IMG:$TAG
+    - docker tag $PFX$IMG:$COMMIT $PFX$IMG:travis-$TRAVIS_BUILD_NUMBER
+    - docker push $PFX$IMG
+
+    - export IMG=zookeeper
+    - cd $TRAVIS_BUILD_DIR/$IMG/$OS && docker build -t $PFX$IMG:$COMMIT .
+    - docker tag $PFX$IMG $PFX$IMG:$TAG
+    - docker tag $PFX$IMG:$COMMIT $PFX$IMG:travis-$TRAVIS_BUILD_NUMBER
+    - docker push $PFX$IMG
+
+    - export IMG=cdh5-hdfs
+    - cd $TRAVIS_BUILD_DIR/$IMG/$OS && docker build -t $PFX$IMG:$COMMIT .
+    - docker tag $PFX$IMG $PFX$IMG:$TAG
+    - docker tag $PFX$IMG:$COMMIT $PFX$IMG:travis-$TRAVIS_BUILD_NUMBER
+    - docker push $PFX$IMG
+
+    - export IMG=daemon
+    - cd $TRAVIS_BUILD_DIR/$IMG/$OS && docker build -t $PFX$IMG:$COMMIT .
+    - docker tag $PFX$IMG $PFX$IMG:$TAG
+    - docker tag $PFX$IMG:$COMMIT $PFX$IMG:travis-$TRAVIS_BUILD_NUMBER
+    - docker push $PFX$IMG
+
+    - export IMG=frontend
+    - cd $TRAVIS_BUILD_DIR/$IMG/$OS && docker build -t $PFX$IMG:$COMMIT .
+    - docker tag $PFX$IMG $PFX$IMG:$TAG
+    - docker tag $PFX$IMG:$COMMIT $PFX$IMG:travis-$TRAVIS_BUILD_NUMBER
+    - docker push $PFX$IMG
+
