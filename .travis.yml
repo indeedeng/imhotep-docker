@@ -10,6 +10,7 @@ env:
         - COMMIT=${TRAVIS_COMMIT::8}
 
 after_success:
+    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
     - export PFX=indeedoss/imhotep-
     - export OS=centos6
