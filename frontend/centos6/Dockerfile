@@ -14,8 +14,8 @@ RUN useradd -G imhotep tomcat7
 
 RUN echo "*/1  *  *  *  * shardbuilder /opt/imhotepTsvConverter/tsvConverter.sh" >> /etc/crontab
 
-RUN wget -O /tmp/tomcat7.tar.gz http://www.us.apache.org/dist/tomcat/tomcat-7/v7.0.75/bin/apache-tomcat-7.0.75.tar.gz
-RUN cd /tmp && tar xzf tomcat7.tar.gz && mv apache-tomcat-7.0.75 /opt/tomcat7
+RUN wget -O /tmp/tomcat7.tar.gz http://www.us.apache.org/dist/tomcat/tomcat-7/v7.0.82/bin/apache-tomcat-7.0.82.tar.gz
+RUN cd /tmp && tar xzf tomcat7.tar.gz && mv apache-tomcat-7.0.82 /opt/tomcat7
 RUN mkdir /opt/tomcat_shared
 ADD tomcat/catalina.properties /opt/tomcat7/conf/catalina.properties
 ADD tomcat/server.xml /opt/tomcat7/conf/server.xml
