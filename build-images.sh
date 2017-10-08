@@ -6,7 +6,7 @@ cd "$(dirname $0)"
 
 readonly prefix="local"
 
-jdkfn=`grep "ADD ../jdk" base-java7/centos6/Dockerfile | cut -f2 -d/`
+jdkfn=`grep "ADD ../jdk" base-java7/centos6/Dockerfile | cut -f2 -d/ | cut -f1 -d\ `
 if stat --printf='' base-java7/$jdkfn 2>/dev/null; then
     echo $jdkfn found
 else
