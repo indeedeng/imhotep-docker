@@ -5,7 +5,7 @@ RUN yum update -y && yum install -y \
     wget \
 && yum clean all
 
-ADD jdk-7u80-linux-x64.rpm
+ADD ../jdk-7u80-linux-x64.rpm
 RUN yum localinstall -y jdk-7u80-linux-x64.rpm
 RUN alternatives --install /usr/bin/java java /usr/java/jdk1.7.0_80/jre/bin/java 20000 \
                  --slave /usr/bin/keytool keytool /usr/java/jdk1.7.0_80/jre/bin/keytool \
