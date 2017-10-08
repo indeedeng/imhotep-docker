@@ -8,8 +8,9 @@ RUN yum update -y && yum install -y \
     wget \
 && yum clean all
 
-RUN useradd shardbuilder
-RUN useradd tomcat7
+RUN groupadd imhotep
+RUN useradd -G imhotep shardbuilder
+RUN useradd -G imhotep tomcat7
 
 RUN echo "*/1  *  *  *  * shardbuilder /opt/imhotepTsvConverter/tsvConverter.sh" >> /etc/crontab
 
