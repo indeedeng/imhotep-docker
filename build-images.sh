@@ -6,7 +6,7 @@ cd "$(dirname $0)"
 
 readonly prefix="local"
 
-export DOCKER_BUILD_OPTS=$DOCKER_BUILD_OPTS
+echo "Running with DOCKER_BUILD_OPTS=${DOCKER_BUILD_OPTS:=}"
 
 oslist=(
     centos6
