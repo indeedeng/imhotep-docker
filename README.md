@@ -85,7 +85,7 @@ export DOCKER_BUILD_OPTS=--squash
 Until we confirm that Imhotep works with Java 8, you'll also need to download a JDK 7 RPM
 (jdk-7u80-linux-x64.rpm) from Oracle and copy it into the base-java7/ directory, e.g.
 ```
-cp ~/Downloads/jdk-7u80/jdk-7u80-linux-x64.rpm imhotep-docker/base-java7/
+cp ~/Downloads/jdk-7u80-linux-x64.rpm imhotep-docker/base-java7/
 ```
 
 Run the provided bash script to build and install the Imhotep docker images locally.
