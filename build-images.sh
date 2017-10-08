@@ -6,14 +6,6 @@ cd "$(dirname $0)"
 
 readonly prefix="local"
 
-jdkfn=`grep "ADD ../jdk" base-java7/centos6/Dockerfile | cut -f2 -d/ | cut -f1 -d\ `
-if stat --printf='' base-java7/$jdkfn 2>/dev/null; then
-    echo $jdkfn found
-else
-    echo "ERROR: You must download $jdkfn and copy into base-java7/"
-    exit 1
-fi
-
 echo "Running with DOCKER_BUILD_OPTS=${DOCKER_BUILD_OPTS:=}"
 
 oslist=(
@@ -26,6 +18,19 @@ images=(
     frontend
 )
 pids=
+
+jdkfn=`grep "COPY ./jdk" base-java7/centos6/Dockerfile | cut -f2 -d/ | cut -f1 -d\ `
+if stat --printf='' base-java7/$jdkfn 2>/dev/null; then
+    echo $jdkfn found
+    for os in "${oslist[@]}"; do
+        cp base-java7/$jdkfn base-java7/$os/
+    done
+else
+    echo "ERROR: You must download $jdkfn and copy into base-java7/"
+    exit 1
+fi
+
+echo "Running with DOCKER_BUILD_OPTS=${DOCKER_BUILD_OPTS:=}"
 
 docker pull centos:6
 
