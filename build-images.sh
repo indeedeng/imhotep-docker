@@ -20,7 +20,7 @@ images=(
 pids=
 
 jdkfn=`grep "COPY ./jdk" base-java7/centos6/Dockerfile | cut -f2 -d/ | cut -f1 -d\ `
-if stat --printf='' base-java7/$jdkfn 2>/dev/null; then
+if [[ -f base-java7/$jdkfn ]]; then
     echo $jdkfn found
     for os in "${oslist[@]}"; do
         cp base-java7/$jdkfn base-java7/$os/
