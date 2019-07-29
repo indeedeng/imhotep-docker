@@ -12,6 +12,10 @@
 
 <sub>Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc.go)</sub>
 
+## Status
+
+![Lifecycle](https://img.shields.io/osslifecycle/indeedeng/imhotep-docker.svg)
+
 ## Introduction
 
 Imhotep is a large-scale analytics platform built by Indeed. To learn more, look at the [Imhotep documentation](http://opensource.indeedeng.io/imhotep/).
@@ -93,7 +97,7 @@ Run the provided bash script to build and install the Imhotep docker images loca
 cd imhotep-docker
 ./build-images.sh
 ```
-This script will run for a while, and when it is complete, you will have four imhotep images available. 
+This script will run for a while, and when it is complete, you will have four imhotep images available.
 
 * local/imhotep-frontend:centos6
 * local/imhotep-daemon:centos6
@@ -145,7 +149,7 @@ docker exec -i $frontend_id service tomcat start
 You should now be able to access the web tools for Imhotep:
 
 * IUpload: [http://localhost/iupload/](http://localhost/iupload/)
-* IQL: [http://localhost/iql/](http://localhost/iql/) 
+* IQL: [http://localhost/iql/](http://localhost/iql/)
 
 (Be sure to specify the correct port if you changed the default.)
 
@@ -227,7 +231,7 @@ This container runs IUpload, IQL, and the Shard Builder (TSV converter).
 
 ### imhotep-daemon
 
-This container runs the Imhotep server process. 
+This container runs the Imhotep server process.
 
 * Script that runs the process: /opt/imhotep/imhotep.sh
 * Daemon log file: /var/data/imhotep/logs/ImhotepDaemon_log4j.log
@@ -259,3 +263,8 @@ $ docker exec -it c91cbbc7722a bash
 
 This container runs a single zookeeper node. You probably won’t need to connect to it.
 
+## Code of Conduct
+This project is governed by the [Contributor Covenant v 1.4.1](CODE_OF_CONDUCT.md)
+
+## License
+[Apache License Version 2.0](LICENSE)
